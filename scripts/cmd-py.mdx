@@ -1,0 +1,21 @@
+---
+title: "cmd.py"
+description: "SymbolEngine state machine parsing symbol streams"
+---
+
+## Purpose
+
+Implements a localized, volatile data tracking engine used to parse symbol streams.
+
+## How the code works
+
+### State initialization
+
+The `SymbolEngine` constructor instantiates an internal state map tracking integer metrics for three specific character tokens: `.`, `,`, and `:`. It also provisions an empty array (`self.history`) to capture sequences sequentially.
+
+### Input parsing loop
+
+The continuous runtime loop (`while True`) blocks on `input(">> ")`. If a token matches a valid symbol key, `update_symbol()`:
+
+- Increments that specific dictionary tracker.
+- Appends the character directly into the history tracker stream.

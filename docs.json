@@ -31,7 +31,38 @@
           "icon": "newspaper"
         }
       ]
-    }
+    },
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": [
+          "index",
+          "quickstart",
+          "compile-engine.mdx"
+        ]
+      },
+      {
+        "group": "Architecture",
+        "pages": [
+          "architecture/system-overview.mdx",
+          "architecture/component-analysis.mdx",
+          "architecture/subdomain-deployment.mdx"
+        ]
+      },
+      {
+        "group": "Scripts Reference",
+        "pages": [
+          "scripts/photondebugger.mdx",
+          "scripts/ayosoft-photon-editor.mdx",
+          "scripts/ayosoft-bat.mdx",
+          "scripts/cmd-py.mdx",
+          "scripts/asd-py.mdx",
+          "scripts/openai-pipeline.mdx",
+          "scripts/readme-blueprint.mdx",
+          "scripts/limitations-website-builder.mdx"
+        ]
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",

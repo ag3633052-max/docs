@@ -1,0 +1,51 @@
+---
+title: "Component Analysis"
+description: "Source mapping for the state machine, desktop utilities, and platform orchestration"
+---
+
+## Core state machine & symbol processing
+
+### `cmd.py` (SymbolEngine)
+
+The fundamental parser. Tracks input frequency metrics for the designated characters `.`, `,`, and `:`.
+
+- Maintains a localized state dictionary.
+- Sequences a linear historic stream (`self.history`) used for token validation.
+
+### API integrations — `ase.py`, `ggg.py`, `cdc.py`
+
+Demonstrates migration from legacy global `openai.api_key` configurations to modern OpenAI client instantiation:
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+```
+
+Processed token histories are fed into LLM prompt contexts for dynamic application rendering.
+
+## Desktop UI & session utilities
+
+### `file.photondebugger` (ModernAdminApp)
+
+A Tkinter graphical interface handling localized user credential evaluation. Separates visibility matrices between basic **User** types and **Administrator** privileges.
+
+### `ayosoft_photon_editor.py`
+
+Workspace utility enabling:
+
+- Raw text manipulation
+- File system synchronization (Save / Open)
+- State rollbacks (undo / redo registers)
+
+### `asd.py`
+
+An execution wrapper that maps localized string definitions (`START_WSL`, `EXECUTE`) into underlying Windows Subsystem for Linux environments or system shells via `subprocess.run`.
+
+## Platform orchestration — the "Null Level Marketing" matrix
+
+### `README.md`
+
+Outlines the conceptual hierarchy using a role assignment model — from **Novice** permissions through full structural **Primate** administration controls.
+
+It also maps how the decentralized encryption algorithms (Permutation Blockchain) intertwine with user e-commerce dashboards and tokenized portfolios.

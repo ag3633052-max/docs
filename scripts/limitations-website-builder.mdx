@@ -1,0 +1,29 @@
+---
+title: "Limitations & Website Builder Notes"
+description: "What the scripts currently do versus planned website-builder capabilities"
+---
+
+The Ayosoft applications and execution files **do not** contain any code for splicing websites or acting as fast website builders. This page clarifies current capabilities versus planned expansions.
+
+## Current capabilities
+
+| Script | What it actually does | What it does **not** do |
+| --- | --- | --- |
+| `ayosoft_photon_editor.py` | Local Tkinter text editor — open, edit, save, copy/paste, undo/redo. | No HTML parsing, CSS generation, or deployment frameworks. |
+| `AYOSOFT.bat` | Prints a greeting and pauses the terminal. | No network sockets, web builders, or browser rendering. |
+| `file.photondebugger` | Local GUI auth and dashboard access based on fixed text configurations. | No remote auth, no session persistence. |
+| `asd.py` | OS bridge mapping `START_WSL` / `EXECUTE` tokens to local shell via `subprocess`. | No HTTP, FTP, or deployment automation built in. |
+
+## To use these as a website builder
+
+To extend them into a fast website builder on your subdomain, you would need to:
+
+1. Write a custom script inside the editor that generates raw HTML/CSS files.
+2. Save those generated assets locally.
+3. Use an automated shell workflow — via `asd.py` or standard FTP/SSH commands — to push the static assets to your hosting server.
+
+## Suggested next steps
+
+- Add an HTML/CSS template emitter module to `ayosoft_photon_editor.py`.
+- Extend `asd.py` with deployment keywords such as `DEPLOY_FTP` or `DEPLOY_SSH`.
+- Document the deployment target in [Subdomain Deployment Strategy](/architecture/subdomain-deployment).

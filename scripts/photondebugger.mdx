@@ -1,0 +1,21 @@
+---
+title: "file.photondebugger"
+description: "Tkinter GUI for user authentication and role-based access control"
+---
+
+## Purpose
+
+Lightweight graphical user interface (GUI) for user authentication and role-based access control.
+
+## How the code works
+
+- Initializes a `ModernAdminApp` class that takes a Tkinter root window.
+- Stores a hardcoded `users` dictionary containing an **Administrator** role and a general **User** role.
+
+### Authentication
+
+When the user clicks **Login**, the `authenticate()` method reads `self.username_entry` and `self.password_entry`, then verifies the input against the dictionary. On a miss, it raises an error via a Tkinter `messagebox`.
+
+### Role-based view
+
+On success, `show_dashboard()` destroys the login frame widgets and draws a new dashboard frame. If the user matches the `Administrator` role string, it dynamically generates extra administrative button widgets (**User Management** and **System Settings**).

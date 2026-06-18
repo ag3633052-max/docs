@@ -1,0 +1,27 @@
+---
+title: "cdc.py, ase.py, ggg.py"
+description: "OpenAI completion pipeline scripts and legacy-to-modern client migration"
+---
+
+## Purpose
+
+Demonstrates transition implementations utilizing remote OpenAI completion calls.
+
+## How the code works
+
+### Legacy pattern — `ase.py` and `ggg.py`
+
+Invoke `openai.ChatCompletion.create(...)` and pass structured role frameworks (system context arrays combined with explicit user string parameters) back to remote endpoints.
+
+### Modern pattern — `cdc.py`
+
+Establishes the standardized object-design migration path:
+
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+```
+
+The `client` instance defaults clean lookups straight to machine environment variables instead of relying on a global `openai.api_key`.

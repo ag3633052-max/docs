@@ -1,0 +1,26 @@
+---
+title: "Compile the Engine"
+description: "Bundle your Flask engine into a standalone executable with PyInstaller"
+---
+
+## Step 1: Install PyInstaller
+
+```bash
+pip install pyinstaller
+```
+
+## Step 2: Compile the Engine
+
+Navigate to your `engine/` folder and run this command:
+
+```bash
+pyinstaller --onefile engine.py
+```
+
+The `--onefile` flag tells it to bundle everything (Flask, Python interpreter, and your code) into a single, standalone executable.
+
+## Step 3: Find Your Executable
+
+Once the process finishes, look inside your project folder. You will see a new directory called `dist/`. Inside that folder, you will find your standalone `engine.exe` file.
+
+By compiling it locally, you ensure the program is perfectly compatible with your specific operating system setup!

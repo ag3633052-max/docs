@@ -1,0 +1,31 @@
+---
+title: "System Overview"
+description: "Multi-tier architecture bridging desktop tools, symbol automation, and the social framework"
+---
+
+The platform operates as a multi-tier environment bridging desktop tools, an interactive glyph automation subsystem, and an integrated social framework.
+
+## Tier diagram
+
+```text
+┌─────────────────────────────────────┐
+│          Subdomain Web Layer        │
+│   (Vue.js Frontend / Node.js API)   │
+└──────────────────┬──────────────────┘
+                   │
+┌──────────────────┴──────────────────┐
+│        Symbol Parsing Engine        │
+│  (cmd.py State Machine / OpenAI)    │
+└──────────────────┬──────────────────┘
+                   │
+┌──────────────────┴──────────────────┐
+│         Desktop Utility Tier        │
+│ (Tkinter UI / WSL Bridge)           │
+└─────────────────────────────────────┘
+```
+
+## Tiers
+
+- **Subdomain Web Layer** — Vue.js frontend backed by a Node.js API.
+- **Symbol Parsing Engine** — `cmd.py` state machine plus OpenAI client integrations.
+- **Desktop Utility Tier** — Tkinter-based UIs and a WSL bridge for local operations.

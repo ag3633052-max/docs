@@ -1,0 +1,23 @@
+---
+title: "Subdomain Deployment Strategy"
+description: "Segment responsibilities across dedicated microservices and subdomains"
+---
+
+Segment responsibilities across dedicated target microservices or subdomains.
+
+## `api.yourdomain.com` — Backend processing
+
+- **Host:** Node.js runtime interfacing with a MongoDB cluster.
+- **Target files:** Migrate the logic inside `asd.py` and `cmd.py` into Node child processes or Python background workers (e.g. FastAPI or Flask) to handle symbol streaming calculations over HTTP/WebSocket requests.
+- **Environment configuration:** Secure API tokens (`OPENAI_API_KEY`) inside `.env` configurations as structured in `cdc.py` — never leave them in plain text.
+
+## `app.yourdomain.com` — User platform & interface
+
+- **Host:** Web server or object storage CDN serving compiled frontend assets (Vue.js).
+- **Target configuration:** Connect interactive client views directly to backend API pathways.
+- **Responsibilities:** Visualize e-commerce data matrices, portfolio calculations, and custom user collection views.
+
+## Local client deployment (optional desktop utilities)
+
+- **Target files:** `file.photondebugger`, `ayosoft_photon_editor.py`, `AYOSOFT.bat`.
+- **Deployment:** These scripts are bound to localized OS rendering frameworks (Tkinter / native terminal processing). Package them as executable binaries — for example, compiling via [PyInstaller](/compile-engine) — and provide them as direct utility downloads through your primary subdomain.

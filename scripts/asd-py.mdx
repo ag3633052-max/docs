@@ -1,0 +1,34 @@
+---
+title: "asd.py"
+description: "System bridge that maps plain-text workflow files to OS shell commands"
+---
+
+## Purpose
+
+Evaluates custom plain-text workflow files (`.np` extensions) and converts line tokens into active OS shell commands.
+
+## How the code works
+
+### File parsing IO
+
+`run_script()` opens a target text file line-by-line, runs `.strip()`, and ignores lines beginning with `#`.
+
+### Tokenization
+
+Lines are split by whitespace chunks (`parts = line.split()`):
+
+- Index `0` (`parts[0]`) is the routing instruction keyword.
+- Subsequent entries are arguments.
+
+### Command mapping
+
+- `START_WSL` — targets `wsl -u [user]` via a shell wrapper execution.
+- `EXECUTE` — joins arguments back into a single execution string.
+
+Both flags pipe their resulting payloads into:
+
+```python
+subprocess.run(..., shell=True, check=True)
+```
+
+A `CalledProcessError` is raised if host system failures occur.

@@ -1,0 +1,18 @@
+---
+title: "ayosoft_photon_editor"
+description: "Standalone Tkinter desktop text editor with file IO and undo/redo"
+---
+
+Applies to `ayosoft_photon_editor.py` and `ayosoft_photon_editor - Copy.py`.
+
+## Purpose
+
+Standalone desktop text file manipulation utility.
+
+## How the code works
+
+- Builds a traditional desktop application frame using Tkinter's `tk.Text` widget configured with `undo=True` to handle native state rollback memory (undo/redo actions).
+- Defines file system interactions using Tkinter's native OS dialog hooks: `filedialog.askopenfilename` and `filedialog.asksaveasfilename`.
+- Standard stream writers/readers handle file transfers:
+  - `with open(file_path, 'r', encoding='utf-8')` imports file payloads to the text area.
+  - `'w'` mode exports the current application string buffer back onto disk.
