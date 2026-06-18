@@ -1,0 +1,75 @@
+# Define palette of 16 colors (just example characters)
+palette = [' ', '.', ':', '-', '=', '+', '*', '#', '%', '@', 'A', 'B', 'C', 'D', 'E', 'F']
+
+# Allocate bits per pixel
+BITS_PER_PIXEL = 4
+
+# Size of sprite
+WIDTH = 8
+HEIGHT = 8
+
+# Total bits needed
+total_bits = WIDTH * HEIGHT * BITS_PER_PIXEL
+
+# Allocate memory (bytes) for sprite data
+# 4 bits per pixel => 2 pixels per byte
+byte_size = (total_bits + 7) // 8
+sprite_data = bytearray(byte_size)
+
+# Function to set pixel color index in sprite data
+def set_pixel(x, y, color_index):
+    pixel_index = y * WIDTH + x
+    bit_position = pixel_index * BITS_PER_PIXEL
+    byte_index = bit_position // 8
+    bit_offset = bit_position % 8
+
+    # Clear existing bits
+    mask = (1 << BITS_PER_PIXEL) - 1
+    mask <<= bit_offset
+    sprite_data[byte_index] &= (~mask) & 0xFF
+
+    # Set new bits
+    sprite_data[byte_index] |= (color_index << bit_offset) & 0xFF
+
+    # Handle bits crossing byte boundary
+    bits_in_current_byte = 8 - bit_offset
+    if bits_in_current_byte < BITS_PER_PIXEL:
+        # Remaining bits in next byte
+        remaining_bits = BITS_PER_PIXEL - bits_in_current_byte
+        sprite_data[byte_index + 1] &= (~((1 << remaining_bits) - 1)) & 0xFF
+        sprite_data[byte_index + 1] |= (color_index >> bits_in_current_byte) & ((1 << remaining_bits) - 1)
+
+# Function to get pixel color index
+def get_pixel(x, y):
+    pixel_index = y * WIDTH + x
+    bit_position = pixel_index * BITS_PER_PIXEL
+    byte_index = bit_position // 8
+    bit_offset = bit_position % 8
+
+    # Read bits
+    bits_in_current_byte = 8 - bit_offset
+    if bits_in_current_byte >= BITS_PER_PIXEL:
+        # All bits in one byte
+        value = (sprite_data[byte_index] >> bit_offset) & ((1 << BITS_PER_PIXEL) - 1)
+    else:
+        # Bits cross byte boundary
+        remaining_bits = BITS_PER_PIXEL - bits_in_current_byte
+        value = (sprite_data[byte_index] >> bit_offset) & ((1 << bits_in_current_byte) - 1)
+        value |= (sprite_data[byte_index + 1] & ((1 << remaining_bits) - 1)) << bits_in_current_byte
+    return value
+
+# Example: create a simple pattern
+for y in range(HEIGHT):
+    for x in range(WIDTH):
+        # Create a checker pattern
+        color = (x + y) % 16
+        set_pixel(x, y, color)
+
+# Render to console
+for y in range(HEIGHT):
+    row = ""
+    for x in range(WIDTH):
+        color_idx = get_pixel(x, y)
+        row += palette[color_idx]
+    print(row)
+
